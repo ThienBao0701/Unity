@@ -74,10 +74,10 @@ public class MathDuelUI : MonoBehaviour
 
         timer=Text("TIME 30",34,canvas.transform); timer.rectTransform.anchoredPosition=new Vector2(0,20); timer.color=Purple;
 
-        Button("18",canvas.transform,Purple,new Vector2(-250,-180),Purple);
-        Button("20",canvas.transform,Purple,new Vector2(250,-180),Purple);
-        Button("22",canvas.transform,Pink,new Vector2(-250,-340),Pink);
-        Button("24",canvas.transform,Pink,new Vector2(250,-340),Pink);
+        Button("18",canvas.transform,new Vector2(420,130),new Vector2(-250,-180),Purple);
+        Button("20",canvas.transform,new Vector2(420,130),new Vector2(250,-180),Purple);
+        Button("22",canvas.transform,new Vector2(420,130),new Vector2(-250,-340),Pink);
+        Button("24",canvas.transform,new Vector2(420,130),new Vector2(250,-340),Pink);
 
         var start=Panel("StartButton",canvas.transform,new Color(1f,.60f,.15f),new Vector2(520,125),new Vector2(0,-560));
         var sb=start.AddComponent<Button>(); var st=Text("BẮT ĐẦU",40,start.transform); st.color=Color.white;

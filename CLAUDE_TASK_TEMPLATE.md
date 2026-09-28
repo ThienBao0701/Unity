@@ -1,6 +1,7 @@
 # Future Exam Task Prompt Template
 
-Use this after the real exam question is available. Paste the actual exam under EXAM QUESTION.
+Use this after the real exam question is available. Paste the actual exam under EXAM QUESTION
+(text, and attach any images/PDF from the exam).
 
 You are working on the Unity exam project for student Trần Thiên Bảo (23632721).
 
@@ -10,7 +11,8 @@ IMPORTANT:
 - The real exam question is the source of truth.
 - W1-W5 are reference material only.
 - Do not assume the real exam is identical to W1-W5.
-- Inspect the repository before editing.
+- Inspect the repository before editing (scenes, scripts, `Packages/manifest.json`, Known Issues in `CLAUDE.md` §9).
+- Many built-in modules are disabled (see `CLAUDE.md` §6). Enable only those the exam needs, and say which.
 - Keep the implementation simple, reliable, and beginner-friendly.
 
 EXAM QUESTION
@@ -19,14 +21,14 @@ EXAM QUESTION
 ========================
 
 TASK
-1. Analyze the exam requirements.
+1. Analyze the exam requirements (numbered list; ask me if something is ambiguous).
 2. Inspect the current repository.
 3. Decide what should be reused, created, or modified.
 4. Implement only what the exam requires.
 5. Avoid unnecessary packages and overengineering.
 6. Check C# compilation and obvious broken references.
 7. Check scenes and Inspector references.
-8. Verify Play Mode behavior where possible.
+8. Verify Play Mode behavior where possible (in a cloud session: say it was not run in Unity and give me exact test steps).
 9. Report exactly what changed.
 10. Give step-by-step instructions for opening and running the result in Unity 2022.3.40f1.
 
