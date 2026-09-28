@@ -9,6 +9,10 @@
 
 .vscode/
 .idea/
+.vs/
+
+*.apk
+*.aab
 
 *.csproj
 *.sln
