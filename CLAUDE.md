@@ -48,6 +48,10 @@ Unity/
 │   └── manifest.json                 (no packages-lock.json yet; see §9)
 ├── ProjectSettings/
 │   └── ProjectVersion.txt            (the ONLY settings file; see §9)
+│   └── Exam/        ACTUAL EXAM (branch exam/actual-exam-2d-3d), see §14
+│       ├── 2D/      Scenes/Cau1_PlanetMove2D, Cau2_RocketOrbit2D · Scripts/PlanetMove2D, RocketOrbit2D · Sprites/Planet.png, Rocket.png
+│       └── 3D/      Scenes/Cau3_Robot3D · Scripts/NeckRotate, RobotMovement · Materials/Robot_*.mat, Floor_Grey.mat
+├── Exam_Report/      report draft (Vietnamese), student guide README, images/, tools/remove_background.py
 ├── Reference_W1_W5/  W1.pdf … W5.pdf (teacher exercises, reference only)
 ├── CLAUDE.md                 this file
 ├── EXAM_WORKFLOW.md          full exam-day workflow + student checklist
@@ -262,3 +266,34 @@ Real Exam Question
 → Report changed files
 → Give step-by-step instructions for the student
 ```
+
+## 14. Actual exam implementation (2026-09-30, branch `exam/actual-exam-2d-3d`)
+
+The real exam (2 photographed pages) is the source of truth. Summary of what it asks:
+- **Câu 1a**: download 2 dreamstime images (rocket icon, globe icon) and remove their white background.
+- **Câu 1b**: the planet moves slowly left → right in 2D.
+- **Câu 2**: the rocket flies around the planet while the planet moves slowly left → right in 2D.
+- **Câu 3.1**: 3D robot (bright orange, compact, cylindrical body, round head with two large camera-like
+  eyes, small rectangle on the chest, long orange arms with round silver ends that can wave, short legs with
+  round feet). "Không cần thiết kế các chi tiết ở giữa ngực robot" → the chest rectangle is plain.
+- **Câu 3.2a**: "Robot thực xoay tròn cổ của nó liên tục khi chương trình chạy" → the **neck** (with the head)
+  rotates continuously. This is the neck, NOT the whole robot (the student's prompt said "whole robot";
+  the exam image wins). To rotate the whole robot instead, move `NeckRotate` to the `Robot` root.
+- **Câu 3.2b**: W → forward, S → backward.
+- Deliverables: a report + two `.unitypackage` files (2D and 3D) exported from Unity.
+
+Implementation:
+- All exam work is in `Assets/Exam/2D` and `Assets/Exam/3D` (each exports as a self-contained package).
+  The old sample scenes/scripts were left unchanged.
+- Scenes were generated as Unity 2022.3 YAML by `Exam_Report/tools/generate_exam_unity_files.py`. They contain a Camera,
+  a Light (3D), and every object pre-wired (no empty Inspector fields). Built-in meshes (Cube 10202,
+  Cylinder 10206, Sphere 10207, Plane 10209) have **no colliders**, so no physics module is needed.
+  Materials use the built-in Standard shader. **No package/manifest changes.**
+- Movement is Transform-based (`Translate`/`Rotate` × `Time.deltaTime`); input is `Input.GetKey` (legacy).
+- `Planet.png` / `Rocket.png` are **placeholders**: dreamstime.com was blocked in the cloud session, so
+  self-drawn icons on white were processed with `Exam_Report/tools/remove_background.py` (border flood
+  fill → alpha). The student must replace them with the real images (same file names, keep the `.meta`),
+  then adjust Pixels Per Unit and `RocketOrbit2D.spriteNoseAngle`. Steps: `Exam_Report/README.md` §3.
+- Verified in the cloud: scripts compile with Roslyn (C# 9, warnings as errors) against stubs of the used
+  Unity API; all scene fileIDs/GUIDs resolve; file name = class name. **Not** verified: opening in Unity,
+  Play Mode, visuals, export.
